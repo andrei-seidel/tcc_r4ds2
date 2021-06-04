@@ -10,5 +10,12 @@ intermed<-purrr::map_df(.f = read.csv2,
                                "data-raw/2019.csv"))
 
 
+# Limpando os dados
+
+hora$dia_semana <- hora$dia_semana %>% stringr::str_to_lower() %>%
+  stringr::str_remove_all(pattern = c("\´","-feira")) %>%
+  forcats::fct_relevel(c("domingo","segunda","terça","quarta","quinta",
+                         "sexta","sabado"))
+
 
 usethis::use_data(DATASET, overwrite = TRUE)
