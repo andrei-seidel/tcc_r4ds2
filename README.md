@@ -2,13 +2,6 @@
 title: "Aspectos temporais dos acidentes de trânsito ocorridos em rodovias federais nos anos de 2015 a 2019"
 author: "por Andrei Seidel"
 date: "02 de junho de 2021"
-header-includes:
-- \newcommand{\bcenter}{\begin{center}}
-- \newcommand{\ecenter}{\end{center}}
-output:
-  prettydoc::html_pretty:
-    theme: architect
-    highlight: github
 ---
 
 ### 1. INTRODUÇÃO
@@ -19,7 +12,8 @@ O presente traballho tem como objetivo verificar como os acidentes, em rodovias 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.align='center'}
 
-dplyr::glimpse
+dados_limpos<-readRDS("R/dados_limpos.rds")
+dplyr::glimpse(dados_limpos)
   
 ```
 
