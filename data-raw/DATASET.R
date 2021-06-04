@@ -23,5 +23,4 @@ hora$dia_semana <- hora$dia_semana %>% stringr::str_to_lower() %>%
 setwd("R")
 
 intermed %>% saveRDS("dados_limpos.rds")
-
 usethis::use_data(DATASET, overwrite = TRUE)
