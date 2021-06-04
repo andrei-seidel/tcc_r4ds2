@@ -9,14 +9,18 @@ intermed<-purrr::map_df(.f = read.csv2,
                                "data-raw/2018.csv",
                                "data-raw/2019.csv"))
 
-
 # Limpando os dados
 
-hora$dia_semana <- hora$dia_semana %>% stringr::str_to_lower() %>%
+intermed$dia_semana <- intermed$dia_semana %>% stringr::str_to_lower() %>%
   stringr::str_remove_all(pattern = c("\´","-feira")) %>%
   forcats::fct_relevel(c("domingo","segunda","terça","quarta","quinta",
                          "sexta","sabado"))
 
+
+hora<-intermed$horario %>% stringr::str_split(pattern = ":",simplify = TRUE) %>%
+  tibble::as_tibble() %>% dplyr::rename("hora"=V1)
+
+intermed$hora<-hora$hora
 
 # Exportar os dados limpos
 
