@@ -12,19 +12,21 @@ intermed<-purrr::map_df(.f = read.csv2,
 # Limpando os dados
 
 intermed$dia_semana <- intermed$dia_semana %>% stringr::str_to_lower() %>%
-  stringr::str_remove_all(pattern = c("\´","-feira")) %>%
+  stringr::str_remove_all(pattern ="-feira") %>%
   forcats::fct_relevel(c("domingo","segunda","terça","quarta","quinta",
-                         "sexta","sabado"))
+                         "sexta","sábado"))
 
 
 hora<-intermed$horario %>% stringr::str_split(pattern = ":",simplify = TRUE) %>%
   tibble::as_tibble() %>% dplyr::rename("hora"=V1)
 
+
+
 intermed$hora<-hora$hora
 
+intermed<-intermed %>% dplyr::arrange(data_inversa)
 # Exportar os dados limpos
 
 setwd("R")
 
 intermed %>% saveRDS("dados_limpos.rds")
-usethis::use_data(DATASET, overwrite = TRUE)
